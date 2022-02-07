@@ -1,4 +1,4 @@
-readline81-0001.patch -p0
+#readline81-0001.patch -p0
 0001-Defaultinput-meta-output-meta-to-on.patch
 0001-Support-stateless-inputrc-configuration.patch
 0001-Fix-to-use-tinfow.patch

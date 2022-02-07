@@ -6,11 +6,11 @@
 #
 %define keepstatic 1
 Name     : readline
-Version  : 8.1
-Release  : 62
-URL      : https://mirrors.kernel.org/gnu/readline/readline-8.1.tar.gz
-Source0  : https://mirrors.kernel.org/gnu/readline/readline-8.1.tar.gz
-Source1  : https://mirrors.kernel.org/gnu/readline/readline-8.1.tar.gz.sig
+Version  : 8.1.2
+Release  : 63
+URL      : https://mirrors.kernel.org/gnu/readline/readline-8.1.2.tar.gz
+Source0  : https://mirrors.kernel.org/gnu/readline/readline-8.1.2.tar.gz
+Source1  : https://mirrors.kernel.org/gnu/readline/readline-8.1.2.tar.gz.sig
 Summary  : Gnu Readline library for command line editing
 Group    : Development/Tools
 License  : GPL-3.0 GPL-3.0+
@@ -25,13 +25,12 @@ BuildRequires : glibc-dev32
 BuildRequires : glibc-libc32
 BuildRequires : ncurses-dev
 BuildRequires : ncurses-dev32
-Patch1: readline81-0001.patch
-Patch2: 0001-Defaultinput-meta-output-meta-to-on.patch
-Patch3: 0001-Support-stateless-inputrc-configuration.patch
-Patch4: 0001-Fix-to-use-tinfow.patch
-Patch5: build.patch
-Patch6: tinfow.patch
-Patch7: pcfile.patch
+Patch1: 0001-Defaultinput-meta-output-meta-to-on.patch
+Patch2: 0001-Support-stateless-inputrc-configuration.patch
+Patch3: 0001-Fix-to-use-tinfow.patch
+Patch4: build.patch
+Patch5: tinfow.patch
+Patch6: pcfile.patch
 
 %description
 Introduction
@@ -147,17 +146,16 @@ staticdev32 components for the readline package.
 
 
 %prep
-%setup -q -n readline-8.1
-cd %{_builddir}/readline-8.1
-%patch1 -p0
+%setup -q -n readline-8.1.2
+cd %{_builddir}/readline-8.1.2
+%patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
-%patch7 -p1
 pushd ..
-cp -a readline-8.1 build32
+cp -a readline-8.1.2 build32
 popd
 
 %build
@@ -165,7 +163,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1620853154
+export SOURCE_DATE_EPOCH=1644276613
 unset LD_AS_NEEDED
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-lto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used "
@@ -176,7 +174,7 @@ export CXXFLAGS="$CXXFLAGS -Os -fdata-sections -ffunction-sections -fno-lto -fno
 make  %{?_smp_mflags}  SHLIB_LIBS="-ltinfow"
 
 pushd ../build32/
-export PKG_CONFIG_PATH="/usr/lib32/pkgconfig"
+export PKG_CONFIG_PATH="/usr/lib32/pkgconfig:/usr/share/pkgconfig"
 export ASFLAGS="${ASFLAGS}${ASFLAGS:+ }--32"
 export CFLAGS="${CFLAGS}${CFLAGS:+ }-m32 -mstackrealign"
 export CXXFLAGS="${CXXFLAGS}${CXXFLAGS:+ }-m32 -mstackrealign"
@@ -194,15 +192,21 @@ cd ../build32;
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1620853154
+export SOURCE_DATE_EPOCH=1644276613
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/readline
-cp %{_builddir}/readline-8.1/COPYING %{buildroot}/usr/share/package-licenses/readline/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/readline-8.1.2/COPYING %{buildroot}/usr/share/package-licenses/readline/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 pushd ../build32/
 %make_install32
 if [ -d  %{buildroot}/usr/lib32/pkgconfig ]
 then
 pushd %{buildroot}/usr/lib32/pkgconfig
+for i in *.pc ; do ln -s $i 32$i ; done
+popd
+fi
+if [ -d %{buildroot}/usr/share/pkgconfig ]
+then
+pushd %{buildroot}/usr/share/pkgconfig
 for i in *.pc ; do ln -s $i 32$i ; done
 popd
 fi
