@@ -6,11 +6,11 @@
 #
 %define keepstatic 1
 Name     : readline
-Version  : 8.1.2
-Release  : 63
-URL      : https://mirrors.kernel.org/gnu/readline/readline-8.1.2.tar.gz
-Source0  : https://mirrors.kernel.org/gnu/readline/readline-8.1.2.tar.gz
-Source1  : https://mirrors.kernel.org/gnu/readline/readline-8.1.2.tar.gz.sig
+Version  : 8.2
+Release  : 64
+URL      : https://mirrors.kernel.org/gnu/readline/readline-8.2.tar.gz
+Source0  : https://mirrors.kernel.org/gnu/readline/readline-8.2.tar.gz
+Source1  : https://mirrors.kernel.org/gnu/readline/readline-8.2.tar.gz.sig
 Summary  : Gnu Readline library for command line editing
 Group    : Development/Tools
 License  : GPL-3.0 GPL-3.0+
@@ -29,13 +29,12 @@ Patch1: 0001-Defaultinput-meta-output-meta-to-on.patch
 Patch2: 0001-Support-stateless-inputrc-configuration.patch
 Patch3: 0001-Fix-to-use-tinfow.patch
 Patch4: build.patch
-Patch5: tinfow.patch
-Patch6: pcfile.patch
+Patch5: pcfile.patch
 
 %description
 Introduction
 ============
-This is the Gnu Readline library, version 8.1.
+This is the Gnu Readline library, version 8.2.
 The Readline library provides a set of functions for use by applications
 that allow users to edit command lines as they are typed in.  Both
 Emacs and vi editing modes are available.  The Readline library includes
@@ -146,16 +145,15 @@ staticdev32 components for the readline package.
 
 
 %prep
-%setup -q -n readline-8.1.2
-cd %{_builddir}/readline-8.1.2
+%setup -q -n readline-8.2
+cd %{_builddir}/readline-8.2
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-%patch6 -p1
 pushd ..
-cp -a readline-8.1.2 build32
+cp -a readline-8.2 build32
 popd
 
 %build
@@ -163,7 +161,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1644276613
+export SOURCE_DATE_EPOCH=1664286010
 unset LD_AS_NEEDED
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-lto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used "
@@ -192,10 +190,10 @@ cd ../build32;
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1644276613
+export SOURCE_DATE_EPOCH=1664286010
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/readline
-cp %{_builddir}/readline-8.1.2/COPYING %{buildroot}/usr/share/package-licenses/readline/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/readline-%{version}/COPYING %{buildroot}/usr/share/package-licenses/readline/8624bcdae55baeef00cd11d5dfcfa60f68710a02 || :
 pushd ../build32/
 %make_install32
 if [ -d  %{buildroot}/usr/lib32/pkgconfig ]
@@ -223,6 +221,7 @@ chmod 755 %{buildroot}/usr/lib64/*
 
 %files data
 %defattr(-,root,root,-)
+/usr/share/readline/rl-timeout.c
 /usr/share/readline/rlkeymaps.c
 
 %files dev
@@ -237,6 +236,7 @@ chmod 755 %{buildroot}/usr/lib64/*
 /usr/include/readline/tilde.h
 /usr/lib64/libhistory.so
 /usr/lib64/libreadline.so
+/usr/lib64/pkgconfig/history.pc
 /usr/lib64/pkgconfig/readline.pc
 /usr/share/man/man3/history.3
 /usr/share/man/man3/readline.3
@@ -245,7 +245,9 @@ chmod 755 %{buildroot}/usr/lib64/*
 %defattr(-,root,root,-)
 /usr/lib32/libhistory.so
 /usr/lib32/libreadline.so
+/usr/lib32/pkgconfig/32history.pc
 /usr/lib32/pkgconfig/32readline.pc
+/usr/lib32/pkgconfig/history.pc
 /usr/lib32/pkgconfig/readline.pc
 
 %files doc
@@ -279,16 +281,16 @@ chmod 755 %{buildroot}/usr/lib64/*
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libhistory.so.8
-/usr/lib64/libhistory.so.8.1
+/usr/lib64/libhistory.so.8.2
 /usr/lib64/libreadline.so.8
-/usr/lib64/libreadline.so.8.1
+/usr/lib64/libreadline.so.8.2
 
 %files lib32
 %defattr(-,root,root,-)
 /usr/lib32/libhistory.so.8
-/usr/lib32/libhistory.so.8.1
+/usr/lib32/libhistory.so.8.2
 /usr/lib32/libreadline.so.8
-/usr/lib32/libreadline.so.8.1
+/usr/lib32/libreadline.so.8.2
 
 %files license
 %defattr(0644,root,root,0755)

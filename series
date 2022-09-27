@@ -3,5 +3,5 @@
 0001-Support-stateless-inputrc-configuration.patch
 0001-Fix-to-use-tinfow.patch
 build.patch
-tinfow.patch
+#tinfow.patch
 pcfile.patch
