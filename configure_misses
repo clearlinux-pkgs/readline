@@ -1,13 +1,11 @@
 Configure miss: TIOCSTAT in sys/ioctl.h
 Configure miss: TIOCSTAT in sys/ioctl.h
+Configure miss: gcc options needed to detect all undeclared functions
+Configure miss: gcc options needed to detect all undeclared functions
 Configure miss: if signal handlers must be reinstalled when invoked
 Configure miss: if signal handlers must be reinstalled when invoked
 Configure miss: libaudit.h
 Configure miss: libaudit.h
-Configure miss: libaudit.h presence
-Configure miss: libaudit.h presence
-Configure miss: libaudit.h usability
-Configure miss: libaudit.h usability
 Configure miss: mbscasecmp
 Configure miss: mbscasecmp
 Configure miss: mbschr
@@ -16,39 +14,21 @@ Configure miss: mbscmp
 Configure miss: mbscmp
 Configure miss: mbstr.h
 Configure miss: mbstr.h
-Configure miss: mbstr.h presence
-Configure miss: mbstr.h presence
-Configure miss: mbstr.h usability
-Configure miss: mbstr.h usability
 Configure miss: speed_t in sys/types.h
 Configure miss: speed_t in sys/types.h
 Configure miss: sys/pte.h
 Configure miss: sys/pte.h
-Configure miss: sys/pte.h presence
-Configure miss: sys/pte.h presence
-Configure miss: sys/pte.h usability
-Configure miss: sys/pte.h usability
 Configure miss: sys/ptem.h
 Configure miss: sys/ptem.h
 Configure miss: sys/stream.h
 Configure miss: sys/stream.h
-Configure miss: sys/stream.h presence
-Configure miss: sys/stream.h presence
-Configure miss: sys/stream.h usability
-Configure miss: sys/stream.h usability
 Configure miss: tgetent
 Configure miss: tgetent
 Configure miss: tgetent in -ltermcap
 Configure miss: tgetent in -ltermcap
 Configure miss: varargs.h
 Configure miss: varargs.h
-Configure miss: varargs.h presence
-Configure miss: varargs.h presence
-Configure miss: varargs.h usability
-Configure miss: varargs.h usability
 Configure miss: wcwidth broken with unicode combining characters
 Configure miss: wcwidth broken with unicode combining characters
 Configure miss: whether or not strcoll and strcmp differ
 Configure miss: whether or not strcoll and strcmp differ
-Configure miss: whether the ctype macros accept non-ascii characters
-Configure miss: whether the ctype macros accept non-ascii characters

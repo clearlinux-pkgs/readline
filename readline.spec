@@ -7,7 +7,7 @@
 %define keepstatic 1
 Name     : readline
 Version  : 8.2
-Release  : 64
+Release  : 65
 URL      : https://mirrors.kernel.org/gnu/readline/readline-8.2.tar.gz
 Source0  : https://mirrors.kernel.org/gnu/readline/readline-8.2.tar.gz
 Source1  : https://mirrors.kernel.org/gnu/readline/readline-8.2.tar.gz.sig
@@ -161,13 +161,13 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1664286010
+export SOURCE_DATE_EPOCH=1664912261
 unset LD_AS_NEEDED
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-lto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used "
-export FCFLAGS="$FFLAGS -Os -fdata-sections -ffunction-sections -fno-lto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used "
-export FFLAGS="$FFLAGS -Os -fdata-sections -ffunction-sections -fno-lto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used "
-export CXXFLAGS="$CXXFLAGS -Os -fdata-sections -ffunction-sections -fno-lto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used "
+export CFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-lto -fno-semantic-interposition "
+export FCFLAGS="$FFLAGS -Os -fdata-sections -ffunction-sections -fno-lto -fno-semantic-interposition "
+export FFLAGS="$FFLAGS -Os -fdata-sections -ffunction-sections -fno-lto -fno-semantic-interposition "
+export CXXFLAGS="$CXXFLAGS -Os -fdata-sections -ffunction-sections -fno-lto -fno-semantic-interposition "
 %configure  --with-curses --enable-multibyte
 make  %{?_smp_mflags}  SHLIB_LIBS="-ltinfow"
 
@@ -190,7 +190,7 @@ cd ../build32;
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1664286010
+export SOURCE_DATE_EPOCH=1664912261
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/readline
 cp %{_builddir}/readline-%{version}/COPYING %{buildroot}/usr/share/package-licenses/readline/8624bcdae55baeef00cd11d5dfcfa60f68710a02 || :
